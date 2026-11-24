@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#126448">
+  <title>모두의 입구 · 배리어 프리 지도</title>
+  <meta name="description" content="유모차와 휠체어를 위한 접근성 장소 지도 체험판">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<header><a class="brand" href="./"><span class="logo" aria-hidden="true">m.</span>모두의 입구</a><span class="header-note">함께 만드는 배리어 프리 지도</span><button id="report" class="primary">＋ 장소 제보</button></header>
+<main>
+  <section class="intro"><div><div class="eyebrow">작은 정보가, 더 넓은 일상으로</div><h1>나들이의 시작,<br>들어갈 수 있는 곳부터.</h1><p>턱 없는 입구부터 기저귀 교환대까지.<br class="mobile"> 우리에게 필요한 장소를 찾아보세요.</p></div><aside class="contribution"><span>우리 동네를 더 편하게</span><strong id="points">0 포인트</strong><small id="badge">첫 제보를 기다리고 있어요</small></aside></section>
+  <section class="explore" aria-label="장소 탐색">
+    <div class="toolbar"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="장소나 동네 검색 (예: 성수)" aria-label="장소나 동네 검색"></label><select id="category" aria-label="장소 종류"><option value="">모든 장소</option>카페</option><option>식당</option><option>병원</option><option>공공시설</option></select><button id="favorites" aria-pressed="false">♡ 즐겨찾기</button></div>
+    <div class="filters" id="filters" aria-label="접근성 필터"></div>
+    <div class="workspace"><section class="results" aria-label="검색 결과"><div class="result-heading"><h2>발견한 장소 <span id="count"></span></h2><button class="text" id="reset">초기화</button></div><p class="sample-note">성수동 예시 데이터 · 실제 시설 정보가 아닙니다</p><div id="list"></div></section><section class="map-wrap" aria-label="장소 지도"><div id="map"></div><div class="map-top">서울 성수동 <span>접근성 지도</span></div><div class="legend"><span><i class="dot green"></i>진입 가능</span><span><i class="dot amber"></i>일부 가능</span><span><i class="dot red"></i>진입 어려움</span></div><div id="map-error" hidden>지도를 불러오지 못했어요. 장소 목록은 계속 이용할 수 있어요.</div></section></div>
+  </section>
+  <footer><strong>함께 확인하고, 함께 나눠요.</strong><span>체험판 · 제보와 활동은 현재 브라우저에만 저장됩니다.</span></footer>
+</main>
+<dialog id="detail"><div id="detail-body"></div></dialog>
+<dialog id="report-dialog"><form id="report-form"><div class="dialog-heading"><div><span class="eyebrow">우리 동네 접근성 기록</span><h2>새로운 장소 제보</h2></div><button type="button" class="close" data-close="report-dialog" aria-label="닫기">×</button></div><p class="muted">직접 확인한 정보만 선택해 주세요. 선택하지 않은 시설은 ‘미확인’으로 표시돼요.</p><div class="form-grid"><label>장소 이름<input name="name" required maxlength="50" placeholder="예: 우리동네 카페"></label><label>장소 종류<select name="category"><option>카페</option><option>식당</option><option>병원</option><option>공공시설</option></select></label></div><label>주소<input name="address" required maxlength="120" placeholder="도로명 주소를 입력해 주세요"></label><div class="location-line"><span>지도를 누르면 제보 위치가 입력돼요.</span><button type="button" id="pick-location">지도에서 위치 선택</button></div><div class="form-grid"><label>위도<input name="lat" type="number" step="any" min="-90" max="90" value="37.5445" required></label><label>경도<input name="lng" type="number" step="any" min="-180" max="180" value="127.0438" required></label></div><fieldset><legend>확인한 편의시설</legend><div id="report-features" class="check-grid"></div></fieldset><label>진입 가능 여부<select name="status"><option value="good">가능</option><option value="partial">일부 가능 (도움 필요)</option><option value="hard">어려움</option></select></label><label>출입구 사진<input type="file" name="photo" accept="image/*"><small>선택 사항 · 최대 5MB, 저장 시 크기를 줄입니다.</small></label><label>방문 메모<textarea name="note" maxlength="500" rows="3" placeholder="문턱 높이, 문 폭, 경사로 상태 등을 알려주세요."></textarea></label><p id="form-error" role="alert"></p><button class="primary wide" type="submit">제보 등록하기 · +50P</button></form></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+</body></html>
